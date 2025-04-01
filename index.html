@@ -8,9 +8,12 @@
         body { font-family: Arial, sans-serif; text-align: center; direction: rtl; }
         .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
         input, select, button { width: 100%; padding: 10px; margin: 5px 0; }
+        .logo { width: 100px; height: 100px; margin: 10px auto; display: block; }
+        .admin-link { margin-top: 20px; display: block; }
     </style>
 </head>
 <body>
+    <img src="logo.png" alt="شعار الصالون" class="logo" id="salonLogo">
     <h2>حجز موعد في الصالون</h2>
     <div class="container">
         <form id="bookingForm">
@@ -36,6 +39,8 @@
         <ul id="appointments"></ul>
     </div>
     
+    <a href="admin.html" class="admin-link">إدارة الحجوزات</a>
+    
     <script>
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -48,6 +53,10 @@
             let listItem = document.createElement('li');
             listItem.textContent = appointment;
             document.getElementById('appointments').appendChild(listItem);
+            
+            let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+            appointments.push(appointment);
+            localStorage.setItem('appointments', JSON.stringify(appointments));
         });
     </script>
 </body>
