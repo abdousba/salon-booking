@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجوزات صالون الحلاقة</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; direction: rtl; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h2>حجز موعد في الصالون</h2>
+    <div class="container">
+        <form id="bookingForm">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" required>
+            
+            <label for="service">اختر الخدمة:</label>
+            <select id="service">
+                <option value="حلاقة شعر">حلاقة شعر</option>
+                <option value="تصفيف شعر">تصفيف شعر</option>
+                <option value="حلاقة ذقن">حلاقة ذقن</option>
+            </select>
+            
+            <label for="date">التاريخ:</label>
+            <input type="date" id="date" required>
+            
+            <label for="time">الوقت:</label>
+            <input type="time" id="time" required>
+            
+            <button type="submit">احجز الآن</button>
+        </form>
+        <h3>المواعيد المحجوزة:</h3>
+        <ul id="appointments"></ul>
+    </div>
+    
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let name = document.getElementById('name').value;
+            let service = document.getElementById('service').value;
+            let date = document.getElementById('date').value;
+            let time = document.getElementById('time').value;
+            
+            let appointment = `${name} - ${service} - ${date} - ${time}`;
+            let listItem = document.createElement('li');
+            listItem.textContent = appointment;
+            document.getElementById('appointments').appendChild(listItem);
+        });
+    </script>
+</body>
+</html>
